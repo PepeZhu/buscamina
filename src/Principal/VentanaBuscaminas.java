@@ -33,7 +33,7 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
        int c = r.nextInt(columnas);
        //si encuantara una bomba ,edita el texto B 
        arrayBotones[f][c].bomba = 1;
-       arrayBotones[f][c].setText("B");
+       arrayBotones[f][c].setText("");
     }
     
     //cuentaminas realiza un paso previo que consiste en contar para cada celda
@@ -41,8 +41,7 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
     private void cuentaMinas(){
         //integer de minas cuando es 0
         int minas = 0;
-        
-        for (int i=0; i< filas; i++){
+         for (int i=0; i< filas; i++){
             for (int j=0; j< columnas; j++){
                 //uso un bucle anidado para recorrer
                 //las 8 casillas que hay alrededor
@@ -55,16 +54,11 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
                 }
                 arrayBotones[i][j].numeroMinasAlrededor = minas;
                 minas = 0;
-                 if ((arrayBotones[i][j].numeroMinasAlrededor > 0) &&
-                    (arrayBotones[i][j].bomba == 0)){
-                   
-                    arrayBotones[i][j].setText(String.valueOf(arrayBotones[i][j].numeroMinasAlrededor));
-                }
+                
             }
-         
         }
         
-        
+      
     }
     
     /**
@@ -102,7 +96,7 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
         for (int i=0; i<numMinas; i++){
             ponUnaBomba();
         }
-        cuentaMinas();
+      
     }
 
     //este método es llamado cada vez que hacemos clic en un botón
@@ -110,13 +104,20 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
         Boton miBoton = (Boton) e.getComponent();
         if(e.getButton() == MouseEvent.BUTTON3){
             miBoton.setText("");
+            
+            
         }
         else{
             cuentaMinas();
-        if(miBoton.bomba==1){
-        
-            miBoton.setText("B");
+     if(miBoton.bomba==1){
+            
+           miBoton.setText("B");
+            
         }
+     if ((miBoton.numeroMinasAlrededor > 0) &&
+                    (miBoton.bomba == 0)){
+                    miBoton.setText(String.valueOf(miBoton.numeroMinasAlrededor));
+                }
             //si es una bomba --> explota y se acaba la partida
             
             //declaro un arraylist para ir guardando la lista de botones
@@ -127,6 +128,7 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
             
             while (listaDeCasillasAMirar.size() > 0){
                 Boton b = listaDeCasillasAMirar.get(0);
+                
                 for (int k=-1; k<2; k++){
                     for (int m=-1; m<2; m++){
                         if ((b.x + k >= 0)&&
@@ -147,10 +149,12 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
                 }
                 //borrar los botones de listaDeCasillasAMirar y pone el 1 
                 listaDeCasillasAMirar.remove(b);
+                b.setBackground(Color.BLUE);
                 b.setText("1");
+              
                 
             }
-            //si no, verificamos la casilla 
+           
             
           
         }
