@@ -3,6 +3,7 @@ package Principal;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.PopupMenu;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -23,9 +24,13 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
     int columnas = 30;
     //numero de minas
     int numMinas = 59;
+ 
     //crea una array de boton
     Boton [][] arrayBotones = new Boton[filas][columnas];
-
+ //declaro un arraylist para ir guardando la lista de botones
+            //que tengo que verificar
+            ArrayList <Boton> listaDeCasillasAMirar = new ArrayList();
+            
     private void ponUnaBomba(){
         //crea un aleatorio r , f c indica minas en la fila y columna
         Random r = new Random();
@@ -61,6 +66,14 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
         
       
     }
+    private void gameOver (){
+      
+    label1.setText("YOU ARE LOST");
+   
+ 
+ 
+       
+    }
     
     /**
      * Creates new form VentanaBuscaminas
@@ -75,6 +88,7 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
             for (int j=0; j< columnas; j++){
              Boton boton = new Boton(i,j);
              boton.setBorder(null);
+             boton.setBackground(Color.BLUE);
              //añado el evento del clic del ratón
              boton.addMouseListener(new MouseAdapter(){
                  @Override
@@ -93,6 +107,7 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
         }
         for (int i=0; i<numMinas; i++){
             ponUnaBomba();
+            
         }
     }
 
@@ -102,12 +117,16 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
         if(e.getButton() == MouseEvent.BUTTON3){
             miBoton.setText("?");
         }
-        else{cuentaMinas();
-        if(miBoton.bomba==1){
-            
-           miBoton.setText("BOOM");
-            
+        else{
+            cuentaMinas();
+        if(miBoton.bomba==1   ){
+            gameOver ();
+           miBoton.setText("B");
+   
         }
+        
+        
+        
         
         if ((miBoton.numeroMinasAlrededor > 0) &&
                     (miBoton.bomba == 0)){
@@ -115,12 +134,9 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
                 }
             //si es una bomba --> explota y se acaba la partida
             
-            //declaro un arraylist para ir guardando la lista de botones
-            //que tengo que verificar
-            ArrayList <Boton> listaDeCasillasAMirar = new ArrayList();
+           
             //añado el botón que ha sido pulsado
             listaDeCasillasAMirar.add(miBoton);
-            
             while (listaDeCasillasAMirar.size() > 0){
                 Boton b = listaDeCasillasAMirar.get(0);
                 for (int k=-1; k<2; k++){
@@ -140,10 +156,13 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
                         }    
                     }
                 }
+                //sirve para borrar los botones 
                 listaDeCasillasAMirar.remove(b);
+               
             }
            
         }
+    
         
     }
     /**
@@ -155,17 +174,28 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        label1 = new java.awt.Label();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        label1.setAlignment(java.awt.Label.CENTER);
+        label1.setBackground(new java.awt.Color(102, 255, 51));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         pack();
@@ -207,5 +237,6 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Label label1;
     // End of variables declaration//GEN-END:variables
 }
