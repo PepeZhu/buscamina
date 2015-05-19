@@ -1,6 +1,7 @@
 
 package Principal;
 
+import java.awt.Color;
 import javax.swing.JButton;
 
 /**
@@ -18,4 +19,8 @@ public class Boton extends JButton{
        x = _x;
        y = _y;
    }
+
+    void setColor(Color GREEN) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

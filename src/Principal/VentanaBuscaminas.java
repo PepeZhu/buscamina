@@ -73,6 +73,7 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
     public VentanaBuscaminas() {
         initComponents();
         setSize(1280, 1024);
+       
         //le digo al jFrame que va a usar un layout de rejilla
         getContentPane().setLayout(new GridLayout(filas, columnas));
         for (int i=0; i< filas; i++){
@@ -82,6 +83,8 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
              boton.setBorder(null);
              //añado el color de fondo
              boton.setBackground(Color.BLUE);
+             
+          
              //añado el evento del clic del ratón
              boton.addMouseListener(new MouseAdapter(){
                  @Override
@@ -136,17 +139,19 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
                                if (arrayBotones[b.x + k][b.y + m].numeroMinasAlrededor == 0){
                                    arrayBotones[b.x + k][b.y + m].setEnabled(false);
                                    listaDeCasillasAMirar.add(arrayBotones[b.x + k][b.y + m]);
+                                   
                                } 
                             }
                         }    
                     }
                 }
+                //borrar los botones de listaDeCasillasAMirar y pone el 1 
                 listaDeCasillasAMirar.remove(b);
+                b.setText("1");
+                
             }
             //si no, verificamos la casilla 
-            if(miBoton.numeroMinasAlrededor > 0){
-                 
-            }
+            
           
         }
         
