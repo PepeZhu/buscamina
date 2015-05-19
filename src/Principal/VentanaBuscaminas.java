@@ -33,7 +33,7 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
        int c = r.nextInt(columnas);
        //si encuantara una bomba ,edita el texto B 
        arrayBotones[f][c].bomba = 1;
-       arrayBotones[f][c].setText("");
+       arrayBotones[f][c].setText("B");
     }
     
     //cuentaminas realiza un paso previo que consiste en contar para cada celda
@@ -55,11 +55,13 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
                 }
                 arrayBotones[i][j].numeroMinasAlrededor = minas;
                 minas = 0;
-                if ((arrayBotones[i][j].numeroMinasAlrededor > 0) &&
+                 if ((arrayBotones[i][j].numeroMinasAlrededor > 0) &&
                     (arrayBotones[i][j].bomba == 0)){
+                   
                     arrayBotones[i][j].setText(String.valueOf(arrayBotones[i][j].numeroMinasAlrededor));
                 }
             }
+         
         }
         
         
@@ -76,6 +78,7 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
         for (int i=0; i< filas; i++){
             for (int j=0; j< columnas; j++){
              Boton boton = new Boton(i,j);
+             //boton sin border
              boton.setBorder(null);
              //añado el color de fondo
              boton.setBackground(Color.BLUE);
@@ -106,6 +109,11 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
             miBoton.setText("");
         }
         else{
+            cuentaMinas();
+        if(miBoton.bomba==1){
+        
+            miBoton.setText("B");
+        }
             //si es una bomba --> explota y se acaba la partida
             
             //declaro un arraylist para ir guardando la lista de botones
