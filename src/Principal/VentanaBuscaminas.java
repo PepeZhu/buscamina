@@ -24,7 +24,8 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
     int columnas = 30;
     //numero de minas
     int numMinas = 59;
- 
+    int altoPantalla = 800;
+   int anchoPantalla =  2000;
     //crea una array de boton
     Boton [][] arrayBotones = new Boton[filas][columnas];
  //declaro un arraylist para ir guardando la lista de botones
@@ -69,10 +70,9 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
     private void gameOver (){
       
     label1.setText("YOU ARE LOST");
-   
+   label1.setSize(anchoPantalla,altoPantalla);
  
  
-       
     }
     
     /**
@@ -80,7 +80,7 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
      */
     public VentanaBuscaminas() {
          initComponents();
-         //el tamaño de la pantalla
+         //el tamaño de la ventana
         setSize(1280, 1024);
         //le digo al jFrame que va a usar un layout de rejilla
         getContentPane().setLayout(new GridLayout(filas, columnas));
@@ -179,23 +179,24 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         label1.setAlignment(java.awt.Label.CENTER);
-        label1.setBackground(new java.awt.Color(102, 255, 51));
+        label1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        label1.setForeground(new java.awt.Color(0, 153, 102));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addGap(121, 121, 121)
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(184, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(152, Short.MAX_VALUE))
         );
 
         pack();
