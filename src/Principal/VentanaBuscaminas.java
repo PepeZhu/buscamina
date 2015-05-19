@@ -67,6 +67,8 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
         
       
     }
+    //cuando has tocado el boton de la bomba ,sale un jlabel lost ,hay que pintarlo
+    //otra vez para terminar el juego
     private void gameOver (){
       
     label1.setText("YOU ARE LOST");
