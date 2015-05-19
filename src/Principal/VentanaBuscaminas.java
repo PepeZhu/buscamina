@@ -31,9 +31,9 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
         Random r = new Random();
        int f = r.nextInt(filas);
        int c = r.nextInt(columnas);
-       //si encuantara una bomba ,edita el texto B 
+       
        arrayBotones[f][c].bomba = 1;
-       arrayBotones[f][c].setText("");
+       
     }
     
     //cuentaminas realiza un paso previo que consiste en contar para cada celda
@@ -52,6 +52,7 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
                         }
                     }
                 }
+                //minas es igual array de boton que situa en la pantalla
                 arrayBotones[i][j].numeroMinasAlrededor = minas;
                 minas = 0;
                 
@@ -65,20 +66,15 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
      * Creates new form VentanaBuscaminas
      */
     public VentanaBuscaminas() {
-        initComponents();
+         initComponents();
+         //el tamaño de la pantalla
         setSize(1280, 1024);
-       
         //le digo al jFrame que va a usar un layout de rejilla
         getContentPane().setLayout(new GridLayout(filas, columnas));
         for (int i=0; i< filas; i++){
             for (int j=0; j< columnas; j++){
              Boton boton = new Boton(i,j);
-             //boton sin border
              boton.setBorder(null);
-             //añado el color de fondo
-             boton.setBackground(Color.BLUE);
-             
-          
              //añado el evento del clic del ratón
              boton.addMouseListener(new MouseAdapter(){
                  @Override
@@ -91,30 +87,29 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
              arrayBotones[i][j] = boton;
              //añado el botón a la pantalla
              getContentPane().add(boton);
+             //Añade el color de pantalla
+              getContentPane().setBackground(Color.ORANGE);
             }
         }
         for (int i=0; i<numMinas; i++){
             ponUnaBomba();
         }
-      
     }
 
     //este método es llamado cada vez que hacemos clic en un botón
     private void botonPulsado(MouseEvent e){
-        Boton miBoton = (Boton) e.getComponent();
+      Boton miBoton = (Boton) e.getComponent();
         if(e.getButton() == MouseEvent.BUTTON3){
-            miBoton.setText("");
+            miBoton.setText("?");
+        }
+        else{cuentaMinas();
+        if(miBoton.bomba==1){
             
+           miBoton.setText("BOOM");
             
         }
-        else{
-            cuentaMinas();
-     if(miBoton.bomba==1){
-            
-           miBoton.setText("B");
-            
-        }
-     if ((miBoton.numeroMinasAlrededor > 0) &&
+        
+        if ((miBoton.numeroMinasAlrededor > 0) &&
                     (miBoton.bomba == 0)){
                     miBoton.setText(String.valueOf(miBoton.numeroMinasAlrededor));
                 }
@@ -128,7 +123,6 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
             
             while (listaDeCasillasAMirar.size() > 0){
                 Boton b = listaDeCasillasAMirar.get(0);
-                
                 for (int k=-1; k<2; k++){
                     for (int m=-1; m<2; m++){
                         if ((b.x + k >= 0)&&
@@ -141,26 +135,17 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
                                if (arrayBotones[b.x + k][b.y + m].numeroMinasAlrededor == 0){
                                    arrayBotones[b.x + k][b.y + m].setEnabled(false);
                                    listaDeCasillasAMirar.add(arrayBotones[b.x + k][b.y + m]);
-                                   
                                } 
                             }
                         }    
                     }
                 }
-                //borrar los botones de listaDeCasillasAMirar y pone el 1 
                 listaDeCasillasAMirar.remove(b);
-                b.setBackground(Color.BLUE);
-                b.setText("1");
-              
-                
             }
            
-            
-          
         }
         
     }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
